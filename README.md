@@ -1,3 +1,6 @@
+## Flask REST Plus, VueJS, and automated testing 
+Test driven docker solution using VueJS, Flask, with prebuilt backed authentication+JWT's running on NGINX/https
+
 ### Getting Started
 
 ``` docker-compose up -d --build ```
