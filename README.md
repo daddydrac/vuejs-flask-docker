@@ -11,7 +11,7 @@
 
 ### The backend API routes will be on:
 
-``` https://localhost:4433/users ```
+``` https://localhost:4433/<api route> ```
 
 
 ### Seed Postgres DB with Flask CLI
@@ -24,7 +24,7 @@
 
 ### Then see the json returned from the users API route here:
 
-``` http://localhost:5001/users ```
+``` https://localhost:4433/users ```
 
 
 ### Run automated unit tests
