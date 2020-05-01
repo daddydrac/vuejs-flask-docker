@@ -1,8 +1,6 @@
 ### Getting Started
 
-```
- docker-compose up -d --build
-```
+``` docker-compose up -d --build ```
 
 
 ### The VueJS UI will be on:
