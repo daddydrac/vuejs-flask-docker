@@ -1,0 +1,32 @@
+# pull official base image
+FROM python:3.8.0-alpine
+
+# install dependencies
+RUN apk update && \
+    apk add --no-cache --virtual build-deps \
+    openssl-dev libffi-dev gcc python3-dev musl-dev \
+    postgresql-dev netcat-openbsd
+
+# set working directory
+WORKDIR /usr/src/app
+
+# set environment varibles
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV FLASK_ENV production
+ENV APP_SETTINGS project.config.ProductionConfig
+ENV SECRET_KEY my_precious
+
+# add and install requirements
+COPY ./requirements.txt /usr/src/app/requirements.txt
+RUN pip install -r requirements.txt
+
+# add app
+COPY . /usr/src/app
+
+# add and run as non-root user
+RUN adduser -D myuser
+USER myuser
+
+# run gunicorn
+CMD gunicorn --bind 0.0.0.0:$PORT manage:app
