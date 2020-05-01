@@ -1,0 +1,76 @@
+version: '3.7'
+
+services:
+
+  backend:
+    build:
+      context: ./services/backend
+      dockerfile: Dockerfile
+    entrypoint: ['/usr/src/app/entrypoint.sh']
+    volumes:
+      - ./services/backend:/usr/src/app
+    ports:
+      - 5001:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/users_dev
+      - DATABASE_TEST_URL=postgresql://postgres:postgres@db:5432/users_test
+      - SECRET_KEY=my_precious
+    depends_on:
+      - db
+    networks:
+      - api_bridge
+    restart: always
+
+  db:
+    build:
+      context: ./services/backend/project/db
+      dockerfile: Dockerfile
+    ports:
+      - 5436:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/
+    volumes:
+      - users_data:/var/lib/postgresql/data/
+    networks:
+      - api_bridge
+
+  frontend:
+    build:
+      context: ./services/frontend
+      dockerfile: Dockerfile
+    volumes:
+      - './services/frontend/ui:/app'
+      - '/app/node_modules'
+    ports:
+      - 3007:8080
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=development
+      - BACKEND_SERVICE_URL=http://127.0.0.1:5001
+      - VUE_GATEWAY_URL=http://127.0.0.1:3007
+    networks:
+      - api_bridge
+
+  nginx:
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 4433:443
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - api_bridge
+
+networks:
+  api_bridge:
+    driver: bridge
+
+volumes:
+  users_data:

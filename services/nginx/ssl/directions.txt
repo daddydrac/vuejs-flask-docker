@@ -1,0 +1,10 @@
+Open the command line and run these commands inside the ssl folder to generate a self signed certificate:
+
+openssl req -new -newkey rsa:4096 -x509 -sha512 -days 365 -nodes -out nginx.crt -keyout nginx.key
+
+
+Generate the DH Params: With Forward Secrecy, if an attacker gets a hold of the server's private key, it will not be able to decrypt past communications. The private key is only used to sign the DH handshake, which does not reveal the pre- master key. Diffie-Hellman ensures that the pre-master keys never leave the client and the server, and cannot be intercepted by a MITM.
+
+This takes bout 3-5 min to generate: 
+
+openssl dhparam -out dhparam.pem 4096

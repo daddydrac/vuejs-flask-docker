@@ -1,0 +1,3 @@
+[run]
+omit = project/tests/*
+branch = True
