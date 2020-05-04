@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
   },
@@ -20,7 +20,7 @@ const routes = [
     component: Register
   },
   {
-    path: '/dashboard',
+    path: '/',
     name: 'Dashboard',
     component: Dashboard,
     meta: {
@@ -56,12 +56,15 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.state.token || localStorage.getItem('token') === 'null') {
+      next({
+        path: '/login',
+        params: { redirect: to.fullPath },
+      })
+    } else {
       next()
-      return
     }
-    next('/')
   } else {
     next()
   }

@@ -1,10 +1,10 @@
 <template>
     <v-app>
-        <Navbar/>
+        <Navbar v-if="this.$store.getters.isLoggedIn"/>
         <v-content class="ma-4">
             <router-view></router-view>
         </v-content>
-        <Footer/>
+        <Footer v-if="this.$store.getters.isLoggedIn"/>
     </v-app>
 </template>
 <script>

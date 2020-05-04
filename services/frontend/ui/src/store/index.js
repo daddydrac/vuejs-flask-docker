@@ -33,9 +33,11 @@ export default new Vuex.Store({
                 commit('auth_request')
                 axios({url:  'http://localhost:5001/auth/login', data: user, method: 'POST'})
                     .then(resp => {
-                        const token = resp.data.token
+                        const token = resp.data.access_token
+                        const refresh_token = resp.data.refresh_token
                         const user = resp.data.user
                         localStorage.setItem('token', token)
+                        localStorage.setItem('refresh_token', refresh_token)
                         axios.defaults.headers.common['Authorization'] = token
                         commit('auth_success', token, user)
                         resolve(resp)
@@ -45,6 +47,16 @@ export default new Vuex.Store({
                         localStorage.removeItem('token')
                         reject(err)
                     })
+            })
+        },
+        logout({ commit }) {
+            return new Promise((resolve) => {
+                commit('logout')
+                localStorage.removeItem('token')
+                localStorage.removeItem('refresh_token')
+                delete axios.defaults.headers.common['Authorization']
+                commit('auth_success', '', '')
+                resolve()
             })
         },
     },

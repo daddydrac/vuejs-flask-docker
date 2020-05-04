@@ -26,7 +26,7 @@
                     </v-list-item>
                 </v-list>
             </v-menu>
-            <v-btn text>
+            <v-btn text @click="logout">
                 <span>Logout</span>
                 <v-icon right>exit_to_app</v-icon>
             </v-btn>
@@ -52,9 +52,7 @@
         data: () => ({
             drawer: true,
             links: [
-                {icon: 'dashboard', text: 'Dashboard', route: '/dashboard'},
-                {icon: 'lock', text: 'Login', route: '/'},
-                {icon: 'verified_user', text: 'Register', route: '/register'},
+                {icon: 'dashboard', text: 'Dashboard', route: '/'},
                 {icon: 'account_box', text: 'User List', route: '/list-user-data'}
             ],
         }),
