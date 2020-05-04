@@ -85,7 +85,7 @@
             dialog: false,
             headers: [
                 {
-                    text: 'Dessert (100g serving)',
+                    text: 'Name',
                     align: 'start',
                     sortable: false,
                     value: 'name',
