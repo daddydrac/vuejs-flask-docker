@@ -1,7 +1,7 @@
 <template>
   <v-footer
           app
-          dark
+          :dark="this.$store.state.dark"
           inset
           padless
 
@@ -14,7 +14,7 @@
             tile
     >
 
-      <v-card-text class="py-2 white--text text-center">
+      <v-card-text class="py-2  text-center">
         {{ new Date().getFullYear() }} — <strong>SAMPLE AUTH VUETIFY</strong>
       </v-card-text>
     </v-card>

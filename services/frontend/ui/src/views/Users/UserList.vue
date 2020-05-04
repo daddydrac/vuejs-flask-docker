@@ -2,9 +2,9 @@
     <div>
         <v-data-table
                 :headers="headers"
-                :items="desserts"
+                :items="users"
                 class="elevation-1"
-                sort-by="calories"
+                sort-by="email"
         >
             <template v-slot:top>
                 <v-toolbar color="white" flat>
@@ -17,7 +17,7 @@
                     <v-spacer></v-spacer>
                     <v-dialog max-width="500px" v-model="dialog">
                         <template v-slot:activator="{ on }">
-                            <v-btn class="mb-2" color="primary" dark v-on="on">New Item</v-btn>
+                            <v-btn class="mb-2" color="primary" dark v-on="on">New User</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -27,21 +27,14 @@
                             <v-card-text>
                                 <v-container>
                                     <v-row>
-                                        <v-col cols="12" md="4" sm="6">
-                                            <v-text-field label="Dessert name" v-model="editedItem.name"></v-text-field>
+                                        <v-col cols="12" md="12" sm="12">
+                                            <v-text-field label="Username" v-model="editedItem.username"></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" md="4" sm="6">
-                                            <v-text-field label="Calories" v-model="editedItem.calories"></v-text-field>
+                                        <v-col cols="12" md="12" sm="12">
+                                            <v-text-field label="Email" v-model="editedItem.email"></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" md="4" sm="6">
-                                            <v-text-field label="Fat (g)" v-model="editedItem.fat"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" md="4" sm="6">
-                                            <v-text-field label="Carbs (g)" v-model="editedItem.carbs"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" md="4" sm="6">
-                                            <v-text-field label="Protein (g)"
-                                                          v-model="editedItem.protein"></v-text-field>
+                                        <v-col cols="12" md="12" sm="12">
+                                            <v-text-field label="Password" v-model="editedItem.password"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -79,6 +72,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         name: "UserList",
         data: () => ({
@@ -88,35 +82,28 @@
                     text: 'Name',
                     align: 'start',
                     sortable: false,
-                    value: 'name',
+                    value: 'username',
                 },
-                {text: 'Calories', value: 'calories'},
-                {text: 'Fat (g)', value: 'fat'},
-                {text: 'Carbs (g)', value: 'carbs'},
-                {text: 'Protein (g)', value: 'protein'},
+                {text: 'Email', value: 'email'},
                 {text: 'Actions', value: 'actions', sortable: false},
             ],
-            desserts: [],
+            users: [],
             editedIndex: -1,
             editedItem: {
-                name: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
+                username: '',
+                email: '',
+                password:''
             },
             defaultItem: {
-                name: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
+                username: '',
+                email: '',
+                password:''
             },
         }),
 
         computed: {
             formTitle() {
-                return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+                return this.editedIndex === -1 ? 'New User' : 'Edit User'
             },
         },
 
@@ -132,89 +119,28 @@
 
         methods: {
             initialize() {
-                this.desserts = [
-                    {
-                        name: 'Frozen Yogurt',
-                        calories: 159,
-                        fat: 6.0,
-                        carbs: 24,
-                        protein: 4.0,
-                    },
-                    {
-                        name: 'Ice cream sandwich',
-                        calories: 237,
-                        fat: 9.0,
-                        carbs: 37,
-                        protein: 4.3,
-                    },
-                    {
-                        name: 'Eclair',
-                        calories: 262,
-                        fat: 16.0,
-                        carbs: 23,
-                        protein: 6.0,
-                    },
-                    {
-                        name: 'Cupcake',
-                        calories: 305,
-                        fat: 3.7,
-                        carbs: 67,
-                        protein: 4.3,
-                    },
-                    {
-                        name: 'Gingerbread',
-                        calories: 356,
-                        fat: 16.0,
-                        carbs: 49,
-                        protein: 3.9,
-                    },
-                    {
-                        name: 'Jelly bean',
-                        calories: 375,
-                        fat: 0.0,
-                        carbs: 94,
-                        protein: 0.0,
-                    },
-                    {
-                        name: 'Lollipop',
-                        calories: 392,
-                        fat: 0.2,
-                        carbs: 98,
-                        protein: 0,
-                    },
-                    {
-                        name: 'Honeycomb',
-                        calories: 408,
-                        fat: 3.2,
-                        carbs: 87,
-                        protein: 6.5,
-                    },
-                    {
-                        name: 'Donut',
-                        calories: 452,
-                        fat: 25.0,
-                        carbs: 51,
-                        protein: 4.9,
-                    },
-                    {
-                        name: 'KitKat',
-                        calories: 518,
-                        fat: 26.0,
-                        carbs: 65,
-                        protein: 7,
-                    },
-                ]
+                axios({ url: process.env.VUE_APP_API_URL + '/users', method: 'GET' }).then((resp) => {
+                        this.users=resp.data
+                })
             },
 
             editItem(item) {
-                this.editedIndex = this.desserts.indexOf(item)
+                this.editedIndex = this.users.indexOf(item)
                 this.editedItem = Object.assign({}, item)
                 this.dialog = true
             },
 
             deleteItem(item) {
-                const index = this.desserts.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+                var deletedIndex = this.users.indexOf(item)
+                deletedIndex = Object.assign({}, item)
+                confirm('Are you sure you want to delete this item?') &&  axios({ url: process.env.VUE_APP_API_URL + '/users/'+deletedIndex.id, method: 'Delete' })
+                    .then(resp => {
+                        console.log(resp.data.message)
+                        this.initialize()
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
             },
 
             close() {
@@ -227,9 +153,29 @@
 
             save() {
                 if (this.editedIndex > -1) {
-                    Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                    axios({ url: process.env.VUE_APP_API_URL + '/users/'+this.editedItem.id, data: this.editedItem, method: 'PUT' })
+                        .then(resp => {
+                            console.log(resp.data.message)
+                            this.initialize()
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                    // Object.assign(this.users[this.editedIndex], this.editedItem)
                 } else {
-                    this.desserts.push(this.editedItem)
+                    let userData= {
+                        "email": this.editedItem.email,
+                        "username": this.editedItem.username,
+                        "password":this.editedItem.password
+                    }
+                    axios({ url: process.env.VUE_APP_API_URL + '/users', data: userData, method: 'POST' })
+                        .then(resp => {
+                            console.log(resp.data.message)
+                            this.initialize()
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
                 }
                 this.close()
             },

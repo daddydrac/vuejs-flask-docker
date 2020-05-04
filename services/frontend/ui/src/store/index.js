@@ -8,7 +8,8 @@ export default new Vuex.Store({
     state: {
         status: '',
         token: localStorage.getItem('token') || '',
-        user: {}
+        user: {},
+        dark:true
     },
     mutations: {
         auth_request(state) {
@@ -31,7 +32,7 @@ export default new Vuex.Store({
         login({commit}, user) {
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url:  'http://localhost:5001/auth/login', data: user, method: 'POST'})
+                axios({url:  process.env.VUE_APP_API_URL + '/auth/login', data: user, method: 'POST'})
                     .then(resp => {
                         const token = resp.data.access_token
                         const refresh_token = resp.data.refresh_token
