@@ -55,7 +55,7 @@
                 {icon: 'dashboard', text: 'Dashboard', route: '/dashboard'},
                 {icon: 'lock', text: 'Login', route: '/'},
                 {icon: 'verified_user', text: 'Register', route: '/register'},
-                {icon: 'account_box', text: 'User List', route: '/users-list'}
+                {icon: 'account_box', text: 'User List', route: '/list-user-data'}
             ],
         })
     }
