@@ -1,9 +1,7 @@
 <template>
     <nav>
         <v-app-bar :dark="this.$store.state.dark" app color="gray">
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer">
 
-            </v-app-bar-nav-icon>
             <v-toolbar-title class="text-uppercase">
                 <span class="font-weight-light">Sample  Auth </span>
                 <span>Vuetify</span>
@@ -31,8 +29,11 @@
                 <span>Logout</span>
                 <v-icon right>exit_to_app</v-icon>
             </v-btn>
+            <v-app-bar-nav-icon  @click.stop="drawer = !drawer">
+
+            </v-app-bar-nav-icon>
         </v-app-bar>
-        <v-navigation-drawer :dark="this.$store.state.dark" app class="gray darken-4" v-model="drawer">
+        <v-navigation-drawer right :dark="this.$store.state.dark" app class="gray darken-4" v-model="drawer">
             <v-list flat>
                 <v-switch :label="`Dark Theme`" @change="switchColor" v-model="mode"></v-switch>
                 <v-list-item :key="link.text" :to="link.route" active-class="border" router v-for="link in links">
