@@ -5,7 +5,7 @@ import Login from "../views/Auth/Login";
 import Register from "../views/Auth/Register";
 import Dashboard from "../views/Dashboard";
 import UserList from "../views/Users/UserList";
-
+import store from '@/store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,7 +22,10 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/home',
@@ -40,7 +43,10 @@ const routes = [
   {
     path:'/list-user-data',
     name: 'Users List',
-    component: UserList
+    component: UserList,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
@@ -49,5 +55,15 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/')
+  } else {
+    next()
+  }
+})
 export default router

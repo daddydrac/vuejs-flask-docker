@@ -26,13 +26,15 @@
                         <v-card-text>
                             <v-form>
                                 <v-text-field
-                                        label="Login"
+                                        v-model="email"
+                                        label="Email"
                                         name="login"
                                         prepend-icon="person"
                                         type="text"
                                 />
 
                                 <v-text-field
+                                        v-model="password"
                                         id="password"
                                         label="Password"
                                         name="password"
@@ -43,7 +45,7 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer/>
-                            <v-btn color="primary">Login</v-btn>
+                            <v-btn color="primary" @click="login">Login</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>
@@ -54,7 +56,22 @@
 
 <script>
     export default {
-        name: "Login"
+        name: "Login",
+        data() {
+            return {
+                email: "",
+                password: ""
+            };
+        },
+        methods:{
+            login(){
+                let email = this.email
+                let password = this.password
+                this.$store.dispatch('login', { email, password })
+                    .then(() => this.$router.push('/dashboard'))
+                    .catch(err => console.log(err))
+            }
+        }
     }
 </script>
 
