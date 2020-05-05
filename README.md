@@ -40,7 +40,7 @@ Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & pre
 
 ### Swagger URL
 
-``` https://localhost:4433/swagger ```
+``` http://localhost:5001/swagger ```
 
 -----------------------------------------------------------
 
