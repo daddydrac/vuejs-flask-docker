@@ -23,8 +23,8 @@ Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & pre
 
 The default login creds that seed the db are:
 
-<strong>User: </strong>  <em>avengers@gmail.com </em>
-<strong>Pass: </strong>  <em>supersecret </em>
+<p><strong>User: </strong>  <em>avengers@gmail.com </em></p>
+<p><strong>Pass: </strong>  <em>supersecret </em></p>
 
 
 
