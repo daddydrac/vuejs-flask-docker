@@ -21,7 +21,7 @@ Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & pre
 
 ```docker-compose exec backend python manage.py seed```
 
-The default login creds that seed the db are:
+### The default login creds that seed the db are:
 
 <p><strong>User: </strong>  <em>avengers@gmail.com </em></p>
 <p><strong>Pass: </strong>  <em>supersecret </em></p>
