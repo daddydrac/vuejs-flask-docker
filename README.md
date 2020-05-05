@@ -28,7 +28,6 @@ Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & pre
 
 
 
-
 ### Then see the json returned from the users API route here:
 
 ``` https://localhost:4433/users ```
@@ -38,6 +37,10 @@ Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & pre
 
 ```docker-compose exec backend pytest "project/tests" -p no:warnings --cov="project"```
 
+
+### Swagger URL
+
+``` https://localhost/swagger ```
 
 -----------------------------------------------------------
 
