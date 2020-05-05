@@ -2,7 +2,7 @@
 FROM python:3.8-slim
 
 # install dependencies
-RUN apt-get update -y && \
+RUN apt-get update && apt-get install -y apt-transport-https && \
     apt-get install -y libssl-dev libffi-dev gcc python3-dev musl-dev build-essential \
     libpq-dev netcat-openbsd
 
