@@ -54,3 +54,9 @@ Open the command line and run these commands inside the ```services/nginx/ssl```
 
 
 ``` openssl dhparam -out dhparam.pem 1024 ```
+
+
+-----------------------------
+### Misc notes 
+
+Only tested and fully functional on Linux.
