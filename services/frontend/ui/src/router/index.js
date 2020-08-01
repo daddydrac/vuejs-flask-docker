@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from "../views/Auth/Login";
 import Register from "../views/Auth/Register";
 import Dashboard from "../views/Dashboard";
+import ControlPanel from "../views/ControlPanel";
 import UserList from "../views/Users/UserList";
 import store from '@/store'
 Vue.use(VueRouter)
@@ -47,7 +48,15 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    path: '/control-panel',
+    name: 'Control Panel',
+    component: ControlPanel,
+    meta: {
+      requiresAuth: true
+    }
+  },
 ]
 
 const router = new VueRouter({

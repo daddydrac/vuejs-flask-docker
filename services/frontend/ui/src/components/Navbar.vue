@@ -58,7 +58,8 @@
             links: [
                 {icon: 'dashboard', text: 'Dashboard', route: '/'},
                 {icon: 'verified_user', text: 'Register', route: '/register'},
-                {icon: 'account_box', text: 'User List', route: '/list-user-data'}
+                {icon: 'account_box', text: 'User List', route: '/list-user-data'},
+                {icon: 'settings_applications', text: 'Control Panel', route: '/control-panel'}
             ],
         }),
         computed: {

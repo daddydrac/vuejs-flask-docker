@@ -1,0 +1,7 @@
+@import 'variables';
+
+.section {
+  background-color: $background;
+  height: 100%;
+  box-shadow: 5px 5px 10px $box_shadow;
+}
