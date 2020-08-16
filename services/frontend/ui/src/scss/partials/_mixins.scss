@@ -1,0 +1,53 @@
+@import 'variables';
+
+%switch-theme {
+  .v-input--switch {
+    .v-input__slot {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .v-input--selection-controls__input {
+      width: 60px;
+      left: 45px;
+      margin: 0;
+
+      input {
+        z-index: 1;
+      }
+    }
+
+    .v-input--selection-controls__ripple {
+      display: none;
+    }
+
+    &__track.theme--light {
+      background-color: transparent;
+      height: 30px;
+      width: 60px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: -8px -4px 8px 0px $white, 8px 4px 12px 0px $icon-box-shadow, 4px 4px 4px 0px $icon-box-shadow inset, -4px -4px 4px 0px $white inset;
+    }
+
+    &__thumb.theme--light {
+      height: 28px;
+      width: 52%;
+      background: $background;
+      border-radius: 15px;
+      transform: translate3d(0, 15%, 0);
+      transition: transform 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+      box-shadow: -8px -4px 8px 0px $white, 8px 4px 12px 0px $icon-box-shadow;
+    }
+
+    :not(.v-input--switch--flat):not(.v-input--switch--inset).v-input--switch__thumb.primary--text {
+      transform: translate3d(100%, 15%, 0);
+      transition: transform 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+    }
+
+    .v-label.theme--light{
+      position: absolute !important;
+      top: 10px;
+    }
+  }
+}

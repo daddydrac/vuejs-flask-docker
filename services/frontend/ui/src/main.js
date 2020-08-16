@@ -3,8 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from '@/plugins/vuetify' // path to vuetify export
+import LodashPlugin from '@/plugins/lodash'
 
 Vue.config.productionTip = false
+
+Vue.use(LodashPlugin)
 
 new Vue({
   vuetify,
