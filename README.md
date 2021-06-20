@@ -56,6 +56,4 @@ Open the command line and run these commands inside the ```services/nginx/ssl```
 
 
 -----------------------------
-### Misc notes 
 
-Only tested and fully functional on Linux.
