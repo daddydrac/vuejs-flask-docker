@@ -1,21 +1,12 @@
 ## Flask REST Plus, VueJS, and automated unit testing via Flask CLI 
 Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & prebuilt authentication+JWT's running on NGINX/https
 
-### Getting Started
+### 1. Getting Started
 
 ``` docker-compose up -d --build ```
 
 
-### The VueJS UI will be on:
-
-``` https://localhost:4433/ ```
-
-### The backend API routes will be on:
-
-``` https://localhost:4433/<api route> ```
-
-
-### Seed Postgres DB with Flask CLI
+### 2. Seed Postgres DB with Flask CLI
 
 ```docker-compose exec backend python manage.py create```
 
@@ -27,25 +18,33 @@ Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & pre
 <p><strong>Pass: </strong>  <em>supersecret </em></p>
 
 
+### 3. The VueJS UI will be on:
 
-### Then see the json returned from the users API route here:
+``` https://localhost:4433/ ```
+
+### 4. The backend API routes will be on:
+
+``` https://localhost:4433/<api route> ```
+
+
+### 5. Then see the json returned from the users API route here:
 
 ``` http://localhost:5001/users ```
 
 
-### Run automated unit tests
+### 6. Run automated unit tests
 
 ```docker-compose exec backend pytest "project/tests" -p no:warnings --cov="project"```
 
 
-### Swagger URL
+### 7. Swagger URL
 
 ``` http://localhost:5001/swagger ```
 
 -----------------------------------------------------------
 
 
-### In case you need to regenerate SSL keys
+### In case you need to regenerate SSL keys 
 
 Open the command line and run these commands inside the ```services/nginx/ssl``` folder to generate a self signed certificate:
 
