@@ -30,7 +30,7 @@ Test driven docker solution using VueJS, Flask, PostgresSQL, with swagger, & pre
 
 ### Then see the json returned from the users API route here:
 
-``` https://localhost:4433/users ```
+``` http://localhost:5001/users ```
 
 
 ### Run automated unit tests
